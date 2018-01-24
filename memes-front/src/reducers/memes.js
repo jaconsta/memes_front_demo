@@ -1,3 +1,5 @@
+import { ADD_MEME } from '../actions/actions'
+
 const initialMemes = {
     isFetching: false,
     items: [
@@ -18,5 +20,20 @@ const initialMemes = {
 }
 
 export default (state = initialMemes, action) => {
-  return state
+  switch (action.type) {
+    case ADD_MEME:
+      return Object.assign({}, state, {
+        items: [
+          ...state.items,
+          {
+            id: action.id,
+            url: action.url,
+            createdAt: action.createdAt
+          }
+        ]
+      })
+      break;
+    default:
+      return state
+  }
 }
